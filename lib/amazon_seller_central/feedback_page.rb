@@ -27,8 +27,9 @@ module AmazonSellerCentral
       def load_first_page
         mech = AmazonSellerCentral.mechanizer
         mech.login_to_seller_central
-        feedback_home = mech.follow_link_with(:text => "Feedback")
-        feedback_page = mech.follow_link_with(:text => "View all your feedback")
+        feedback_page = mech.agent.get "https://sellercentral.amazon.com/gp/seller-rating/pages/feedback-manager.html/ref=ag_srfdback_cont_srsumprf"
+        # feedback_home = mech.agent.get "https://sellercentral.amazon.com/gp/seller-rating/pages/performance-summary.html/ref=ag_srsumprf_anav_srnavbar"
+        # feedback_page = mech.follow_link_with(:text => "View all your feedback")
         FeedbackPage.new(:page => feedback_page, :agent => mech)
       end
 
